@@ -1,0 +1,6 @@
+/kvdroid/
+/.idea/
+/.buildozer/
+/bin/
+main.py.orig
+google-services.json

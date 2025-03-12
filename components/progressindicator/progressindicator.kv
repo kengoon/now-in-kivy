@@ -1,0 +1,64 @@
+<CircularProgressIndicator>
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: self._rotation_angle
+            origin: self.center
+    canvas:
+        Color:
+            rgba: self.color if self.color else app.theme_cls.primary_color
+            a: self._alpha
+        SmoothLine:
+            cap: 'square'
+            width: root.line_width
+            circle:
+                self.center_x, self.center_y, self.width / 2, \
+                self._angle_start, self._angle_end
+    canvas.after:
+        PopMatrix
+
+
+<LinearProgressIndicator>
+    canvas:
+        Clear
+        # Inactive track.
+        Color:
+            rgba:
+                app.theme_cls.disabled_color \
+                if not self.track_color else \
+                self.track_color
+        SmoothRoundedRectangle:
+            radius: root.radius
+            size:
+                (self.width, self.height) \
+                if self.orientation == "horizontal" else \
+                (self.width, self.height)
+            pos:
+                (self.x, self.center_y - self.height / 2) \
+                if self.orientation == "horizontal" else \
+                (self.center_x - self.width / 2, self.y)
+        # Active track.
+        Color:
+            rgba:
+                app.theme_cls.primary_color \
+                if not self.indicator_color else \
+                self.indicator_color
+        SmoothRoundedRectangle:
+            radius: root.radius
+            size:
+                ( \
+                self.width * self.value_normalized, \
+                self.height if self.height else dp(4) \
+                ) \
+                if self.orientation == "horizontal" else \
+                (self.width, self.height * self.value_normalized)
+            pos:
+                ( \
+                self.width * (1 - self.value_normalized) + self.x \
+                if self.reversed else self.x + self._x, \
+                self.center_y - self.height / 2 \
+                ) \
+                if self.orientation == "horizontal" \
+                else (self.center_x - self.width / 2, self.height \
+                * (1 - self.value_normalized) + self.y if self.reversed \
+                else self.y)

@@ -1,0 +1,104 @@
+<OtpSheet>
+    orientation: "vertical"
+    padding: "20dp"
+    adaptive_height: True
+    spacing: "10dp"
+    y: -root.height - dp(50)
+    canvas:
+        Color:
+            rgba: app.theme_cls.bg_color
+        SmoothRoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: root.radius
+    canvas.before:
+        Color:
+            rgba: app.theme_cls.shadow_color
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: 0, 0
+            spread_radius: -dp(5), -dp(5)
+            border_radius: [root.radius[0], root.radius[1], 0, 0]
+            blur_radius: dp(15)
+    IconButton:
+        icon: "close"
+        bg_color: app.theme_cls.accent_color
+        pos_hint: {"right": 1}
+        on_release: root.dismiss()
+    CustomLabel:
+        text: "Verify your number"
+        font_size: "22sp"
+        halign: "center"
+        adaptive_height: True
+    CustomLabel:
+        text:
+            "We've sent 6-digit code to {} via [color={}]SMS[/color] and [color={}]" \
+            "Whatsapp[/color]".format(root.phone_number, primary_color, primary_color)
+        adaptive_height: True
+        halign: "center"
+        font_size: "14sp"
+        markup: True
+    CustomBoxLayout:
+        adaptive_height: True
+        orientation: "vertical"
+        spacing: "15dp"
+        padding: 0, "20dp", 0, "100dp"
+        pos_hint: {"center_y": .7}
+        CustomLabel:
+            text: "Enter OTP [color=ff0000]*[/color]"
+            adaptive_height: True
+            halign: "center"
+            markup: True
+            font_size: "14sp"
+            bold: True
+        CustomTextInput:
+            id: otp
+            padding: "25p", "15dp"
+            halign: "center"
+            radius: "10dp"
+            font_size: "22sp"
+            input_type: "number"
+            input_filter: "int"
+            size_hint_x: None
+            width: (sp(15) * 6) + dp(50)
+            pos_hint: {"center_x": .5}
+            on_text:
+                if len(self.text) == 6: \
+                self.focus = False
+
+                if len(self.text) > 6: \
+                self.text = self.text[:6]
+        CustomButton:
+            id: tbtn
+            text_size: self.width, None
+            adaptive_size: True
+            padding: "10dp", "15dp"
+            radius: self.height / 2
+            halign: "center"
+            text: "Tap here to resend OTP {}".format(("(" + str(root.timeout) + "s)") if root.timeout else "")
+            pos_hint: {"center_x": .5}
+            disabled: bool(root.timeout)
+            disabled_color: app.theme_cls.disabled_color
+            -bg_color: app.theme_cls.accent_color
+            -color: app.theme_cls.primary_color
+            font_size: "14sp"
+            on_release: root.resend_otp()
+    CustomButton:
+        id: btn
+        size_hint_y: None
+        height: "45dp"
+        radius: self.height / 2
+        text: "Verify"
+        bold: True
+        disabled: len(otp.text) < 6
+        disabled_color: "white"
+        -bg_color: app.theme_cls.disabled_color if self.disabled else app.theme_cls.primary_color
+        on_release: root.submit_otp()
+        CircularProgressIndicator:
+            id: spinner
+            active: False
+            color: "white"
+            size: "20dp", "20dp"
+            pos: self.parent.width - dp(20), (self.parent.height / 2) + dp(10)
+            line_width: 2

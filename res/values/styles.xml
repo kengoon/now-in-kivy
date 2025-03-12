@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App" parent="@style/Theme.AppCompat.Light.NoActionBar">
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowActionBar">false</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">#FFF9EF</item>
+        <item name="android:navigationBarColor">#FFF9EF</item>
+        <!-- Display cutout is an area on some devices that extends into the display surface -->
+<!--        <item name="android:windowLayoutInDisplayCutoutMode">always</item>-->
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+    </style>
+</resources>

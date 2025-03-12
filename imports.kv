@@ -1,0 +1,23 @@
+#:import datetime datetime.datetime
+#:import LowerScrollEffect components.effects.LowerScrollEffect
+#:import StretchOverScrollStencil components.effects.StretchOverScrollStencil
+#:set primary_color "#EA5C22"
+#:set icon_path "assets/fonts/materialdesignicons-webfont.ttf"
+
+<TouchRippleBehavior>:
+#    ripple_duration_in: .7
+#    ripple_duration_out: .5
+    ripple_color: .7, .7, .7, .5
+
+<CustomBoxLayout@BoxLayout+AdaptiveBehavior>
+
+<StencilBoxLayout@CustomBoxLayout+StencilBehavior>
+
+<Selector>
+    color: app.theme_cls.primary_color
+
+#<StencilView>
+#    canvas.before:
+#        Clear
+#    canvas.after:
+#        Clear

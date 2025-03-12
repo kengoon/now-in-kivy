@@ -1,0 +1,52 @@
+<BlogList>:
+    size_hint_y: None
+    size: self._size
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgba: app.theme_cls.bg_color
+        SmoothRoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [dp(16)]
+    canvas.before:
+        Color:
+            rgba: app.theme_cls.shadow_color
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: 0, 0
+            spread_radius: -dp(7), -dp(7)
+            blur_radius: dp(10)
+            border_radius: [dp(8)] * 4
+    CoverImage:
+        radius: "16dp", "16dp", 0, 0
+        size_hint_y: None
+        height: "170dp"
+        source: root.image
+    BoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "20dp"
+        BoxLayout:
+            spacing: "10dp"
+            size_hint_y: None
+            height: self.minimum_height
+            CustomLabel:
+                text: root.title
+                font_size: "24sp"
+                adaptive_height: True
+                line_height: 1.32
+            IconButton:
+                icon: "bookmark-outline"
+                pos_hint: {"top": 1}
+        CustomLabel:
+            text: root.date + " : " + root.post_type
+            font_size: "11sp"
+            adaptive_height: True
+        CustomLabel:
+            text: root.summary
+            line_height: 1.24
+            font_size: "16sp"
+            adaptive_height: True
+

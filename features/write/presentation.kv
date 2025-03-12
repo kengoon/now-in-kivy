@@ -1,0 +1,34 @@
+<WriteScreen>:
+    name: "write screen"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 0, 0, 0, "80dp"
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            padding: "10dp"
+            IconButton:
+                icon: "close"
+            Widget
+            CustomButton:
+                size_hint_y: None
+                height: "35dp"
+                adaptive_width: True
+                padding: "20dp", 0
+                text: "Post"
+                bold: True
+                radius: self.height / 2
+                pos_hint: {"center_y": .5}
+        CustomTextInput:
+            hint_text: "What's happening?"
+            font_size: "18sp"
+            padding: "50dp", 0, "10dp", 0
+            bg_color: app.theme_cls.transparent_color
+            input_type: "text"
+            on_focus: root.push_up_textinput(self.focus)
+        Divider:
+            id: divider
+        CustomBoxLayout:
+            adaptive_height: True
+            IconButton:
+                icon: "image"

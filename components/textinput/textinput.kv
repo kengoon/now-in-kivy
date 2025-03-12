@@ -1,0 +1,23 @@
+<CustomTextInput>
+    cursor_color: app.theme_cls.primary_color
+    cursor_width: "2sp"
+    selection_color: app.theme_cls.primary_color[:3] + [.5]
+    canvas.before:
+        Clear
+        Color:
+            rgba: self.bg_color if self.bg_color else app.theme_cls.accent_color
+        SmoothRoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.radius
+        Color:
+            rgba:
+                (self.cursor_color
+                if self.focus and not self._cursor_blink
+                and int(self.x + self.padding[0]) <= self._cursor_visual_pos[0] <= int(self.x + self.width - self.padding[2])
+                else (0, 0, 0, 0))
+        Rectangle:
+            pos: self._cursor_visual_pos
+            size: root.cursor_width, -self._cursor_visual_height
+        Color:
+            rgba: self.disabled_foreground_color if self.disabled else (self.hint_text_color if not self.text else app.theme_cls.primary_color)

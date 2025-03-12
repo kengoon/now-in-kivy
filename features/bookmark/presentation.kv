@@ -1,0 +1,66 @@
+<BookmarkScreen>:
+    name: "bookmark screen"
+    CustomBoxLayout:
+        adaptive_height: True
+        pos_hint: {"center_y": .5}
+        orientation: "vertical"
+        padding: "60dp", 0
+        Icon:
+            icon: "bookmark-multiple-outline"
+            font_size: "70sp"
+            color: app.theme_cls.primary_color
+            pos_hint: {"center_x": .5}
+        CustomLabel:
+            adaptive_height: True
+            line_height: "1.24"
+            text: "No saved updates"
+            padding: 0, "50dp", 0, "5dp"
+            font_size: "18sp"
+            bold: True
+            halign: "center"
+        CustomLabel:
+            adaptive_height: True
+            line_height: "1.24"
+            font_size: "14sp"
+            halign: "center"
+            text: "Updates you save will be stored here to read later"
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            padding: "10dp"
+            IconButton:
+                icon: "magnify"
+            CustomLabel:
+                text: "Saved"
+                font_size: "22sp"
+                bold: True
+                halign: "center"
+                adaptive_height: True
+                pos_hint: {"center_y": .5}
+            IconButton:
+                icon: "cog"
+        RealRecycleView:
+            id: rv
+#            viewclass: "BlogList"
+            do_scroll_x: False
+            effect_cls: StretchOverScrollStencil
+            track_scroll_movement: True
+            scroll_distance: 0
+            bar_width: 0
+#            on_scroll_y: root.move_eb()
+#            on_overscroll_up: root.paginate_menu()
+            RecycleBoxLayout:
+                id: rb
+                root: root
+                orientation: 'vertical'
+                size_hint_y: None
+                size: self.minimum_size
+                default_size_hint: 1, None
+                # magic value for the default height of the message
+                default_size: 0, "170dp"
+                key_size: '_size'
+                spacing: "20dp"
+                padding: "20dp", "20dp", "20dp", "100dp"

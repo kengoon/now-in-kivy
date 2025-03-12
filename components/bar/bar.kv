@@ -1,0 +1,109 @@
+<NavigationItemIcon>
+    size_hint: None, None
+    size: "24sp", "24sp"
+    primary_color: app.theme_cls.primary_color
+    color:
+        ((
+        self.icon_color_active
+        if self.icon_color_active else
+        app.theme_cls.bg_color
+        ) if self.parent.parent.active else
+        (
+        self.icon_color_normal
+        if self.icon_color_normal else
+        app.theme_cls.text_color
+        )) if self.parent else app.theme_cls.transparent_color
+    on_icon:
+        if self.icon not in md_icons.keys(): \
+        self.size_hint = (None, None); \
+        self.width = self.font_size; \
+        self.height = self.font_size
+
+    canvas.before:
+        Color:
+            rgba:
+                ((
+                app.theme_cls.primary_color
+                if not self.parent.parent.indicator_color else
+                self.parent.parent.indicator_color
+                )
+                if self.parent.parent.active else
+                app.theme_cls.transparent_color
+                ) if self.parent else app.theme_cls.transparent_color
+        SmoothRoundedRectangle:
+            radius: [dp(16), ]
+            size:
+                ( \
+                (self.parent.parent._selected_region_width, dp(32)) \
+                ) \
+                if self.parent else (0, dp(32))
+            pos:
+                ( \
+                (self.center_x - self.parent.parent._selected_region_width / 2, \
+                self.center_y - dp(16)) \
+                ) \
+                if self.parent else (0, 0)
+
+<NavigationItemLabel>
+    adaptive_size: True
+    font_size: "14sp"
+    primary_color: app.theme_cls.primary_color
+    color:
+        ((
+        self.text_color_active
+        if self.text_color_active else
+        app.theme_cls.primary_color
+        ) if self.parent.parent.active else
+        (
+        self.text_color_normal
+        if self.text_color_normal else
+        app.theme_cls.text_color
+        )) if self.parent else app.theme_cls.transparent_color
+
+<NavigationBar>
+    size_hint_y: None
+    height: "80dp"
+    canvas:
+        Color:
+            rgba: app.theme_cls.bg_color
+        SmoothRoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: root.radius
+    canvas.before:
+        Color:
+            rgba: app.theme_cls.shadow_color
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: 0, 0
+            spread_radius: -dp(5), -dp(5)
+            blur_radius: dp(10)
+
+
+<NavigationItem>
+
+    BoxLayout:
+        id: icon_container
+        size_hint: None, None
+        size: self.minimum_size
+        pos_hint: {"center_x": .5}
+        y:
+            ( \
+            (root.parent.height - (self.height + dp(16))) \
+            if len(label_container.children) else \
+            (root.parent.height / 2 - self.height / 2) \
+            ) \
+            if root.parent else 0
+
+    BoxLayout:
+        id: label_container
+        size_hint: None, None
+        size: self.minimum_size
+        pos_hint: {"center_x": .5}
+        y:
+            "16dp" \
+            if len(icon_container.children) else \
+            ( \
+            (root.parent.height / 2 - self.height / 2) if root.parent else 0 \
+            )

@@ -1,0 +1,41 @@
+<HomeScreen>:
+    name: "home screen"
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: None
+            height: self.minimum_height
+            padding: "10dp"
+            IconButton:
+                icon: "magnify"
+            CustomLabel:
+                text: "Now in Kivy"
+                font_size: "22sp"
+                bold: True
+                halign: "center"
+                adaptive_height: True
+                pos_hint: {"center_y": .5}
+            IconButton:
+                icon: "cog"
+        RealRecycleView:
+            id: rv
+            viewclass: "BlogList"
+            do_scroll_x: False
+            effect_cls: StretchOverScrollStencil
+            track_scroll_movement: True
+            scroll_distance: 0
+            bar_width: 0
+#            on_scroll_y: root.move_eb()
+#            on_overscroll_up: root.paginate_menu()
+            RecycleBoxLayout:
+                id: rb
+                root: root
+                orientation: 'vertical'
+                size_hint_y: None
+                size: self.minimum_size
+                default_size_hint: 1, None
+                # magic value for the default height of the message
+                default_size: 0, "170dp"
+                key_size: '_size'
+                spacing: "20dp"
+                padding: "20dp", "20dp", "20dp", "100dp"#, cover_image.height + eb.height, "20dp", "20dp"

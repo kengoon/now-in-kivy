@@ -12,7 +12,7 @@ Builder.load_file(join(dirname(__file__), basename(__file__).split(".")[0] + ".k
 
 class WriteScreen(BaseScreen):
     @android_only
-    @triggered(.2)
+    @triggered(.3)
     def push_up_textinput(self, focus):
         from kvdroid.tools import check_keyboad_visibility_and_get_height
 

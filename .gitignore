@@ -4,3 +4,5 @@
 /bin/
 main.py.orig
 google-services.json
+build-sign-apk.sh
+/sjbillingclient/

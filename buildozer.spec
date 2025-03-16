@@ -29,7 +29,7 @@ source.exclude_dirs = tests, bin, venv, .venv, cache
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+version = 0.3
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -309,7 +309,7 @@ android.allow_backup = True
 android.no-byte-compile-python = True
 
 # (str) The format used to package the app for release mode (aab or apk or aar).
-android.release_artifact = apk
+android.release_artifact = aab
 
 # (str) A display cutout is an area on some devices that extends into the display surface.
 # It allows for an edge-to-edge experience while providing space for important sensors on the front of the device.
@@ -318,7 +318,7 @@ android.release_artifact = apk
 android.display_cutout = shortEdges
 
 # (str) The format used to package the app for debug mode (apk or aar).
-# android.debug_artifact = apk
+android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific

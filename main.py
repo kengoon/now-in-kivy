@@ -1,6 +1,5 @@
 from kivy import platform
 from kivy.app import App
-from kivy.core.window import Window
 from kivy.loader import Loader
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import FadeTransition
@@ -25,7 +24,7 @@ class ChollofApp(App):
         super().__init__(**kwargs)
         self.sm = None
         self.theme_cls = ThemeManager()
-        # self.theme_cls.theme_style = "Dark"
+        self.theme_cls.theme_style = "Dark"
         if platform == "android":
             from kvdroid.tools import change_statusbar_color, navbar_color
             change_statusbar_color(

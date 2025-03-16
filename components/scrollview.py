@@ -219,13 +219,15 @@ class RealRecycleView(RecycleView):
         super().on_touch_down(touch)
 
     def on_touch_move(self, touch):
-        self.effect_x.convert_overscroll(touch)
-        self.effect_y.convert_overscroll(touch)
+        if hasattr(self.effect_x, "convert_overscroll"):
+            self.effect_x.convert_overscroll(touch)
+            self.effect_y.convert_overscroll(touch)
         super().on_touch_move(touch)
 
     def on_touch_up(self, touch):
-        self.effect_x.reset_scale()
-        self.effect_y.reset_scale()
+        if hasattr(self.effect_x, "reset_scale"):
+            self.effect_x.reset_scale()
+            self.effect_y.reset_scale()
         super().on_touch_up(touch)
 
     def on_real_scroll_stop(self):

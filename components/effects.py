@@ -55,7 +55,7 @@ class StretchOverScrollStencil(ScrollEffect):
     :class:`~kivy.effects.dampedscrolleffect`.
     """
 
-    friction = NumericProperty(0.015)
+    friction = NumericProperty(0.035)
 
     # Android constants.
     minimum_absorbed_velocity = 0

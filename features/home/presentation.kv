@@ -17,6 +17,7 @@
                 pos_hint: {"center_y": .5}
             IconButton:
                 icon: "cog"
+                on_release: root.buy_product()
         RealRecycleView:
             id: rv
             viewclass: "BlogList"
